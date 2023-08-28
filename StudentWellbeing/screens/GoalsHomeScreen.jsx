@@ -36,25 +36,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = (props) => {
-
+const GoalsHomeScreen = () => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <View style={styles.buttonMainParent}>
-        <TouchableOpacity style={[styles.buttonMain, styles.button]}>
-          <Text style={styles.buttonText}>Daily Check-In</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonMain, styles.button]}>
-          <Text style={styles.buttonText}>Concerned for someone else</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.container}>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Reminders</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() =>
-            props.navigation.navigate("Goals")
-          } style={[styles.buttonGrid, styles.button]}>
+        <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Daily Goals</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
@@ -68,4 +57,4 @@ const HomeScreen = (props) => {
   );
 };
 
-export default HomeScreen;
+export default GoalsHomeScreen;
