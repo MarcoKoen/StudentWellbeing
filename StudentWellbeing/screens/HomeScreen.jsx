@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
@@ -30,10 +31,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 8,
     marginVertical: 8,
+    overflow: "hidden",
   },
   buttonText: {
     textAlign: "center",
   },
+  icon: {
+    position: "absolute",
+    bottom: -10,
+    right: -10,
+    opacity: 0.5,
+    transform: [{ rotate: "25deg" }],
+  }
 });
 
 const HomeScreen = (props) => {
@@ -56,6 +65,7 @@ const HomeScreen = (props) => {
             props.navigation.navigate("Goals")
           } style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Daily Goals</Text>
+          <FontAwesomeIcon icon="check-circle" size={60} color="black" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Journal</Text>
