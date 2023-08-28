@@ -24,6 +24,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  add: {
+    backgroundColor: "#ccc",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    height: 50,
+    width: 50,
+  },
 });
 
 const GoalsHomeScreen = () => {
@@ -41,6 +49,12 @@ const GoalsHomeScreen = () => {
             <Text>ToDo: 0</Text>
           </View>
         </View>
+      </View>
+
+      <View>
+        <TouchableOpacity style={styles.add}>
+         <FontAwesomeIcon icon="plus" size={32} color="black"/>
+        </TouchableOpacity>
       </View>
     </View>
   );

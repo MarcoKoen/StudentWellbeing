@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: "absolute",
-    bottom: -10,
+    bottom: -8,
     right: -10,
     opacity: 0.5,
     transform: [{ rotate: "25deg" }],
@@ -60,6 +60,7 @@ const HomeScreen = (props) => {
       <View style={styles.container}>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Reminders</Text>
+          <FontAwesomeIcon icon="bell" size={60} color="black" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() =>
             props.navigation.navigate("Goals")
@@ -69,9 +70,11 @@ const HomeScreen = (props) => {
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Journal</Text>
+          <FontAwesomeIcon icon="book" size={60} color="black" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Settings</Text>
+          <FontAwesomeIcon icon="gear" size={60} color="black" style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>
