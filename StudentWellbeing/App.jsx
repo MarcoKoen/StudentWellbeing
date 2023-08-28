@@ -6,6 +6,11 @@ import GoalsHomeScreen from "./screens/GoalsHomeScreen";
 
 const Stack = createNativeStackNavigator();
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSquareCheck, faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSquareCheck, faCheck, faCheckCircle)
+
 const App = () => {
   return (
     <NavigationContainer>
