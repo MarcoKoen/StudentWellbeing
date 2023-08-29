@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between", // Adjust as needed
+    
   },
   buttonMainParent: {
     flex: 1,
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
 const HomeScreen = (props) => {
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center",backgroundColor: "#E8EDDF" }}>
       <View style={styles.buttonMainParent}>
         <TouchableOpacity style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Daily Check-In</Text>

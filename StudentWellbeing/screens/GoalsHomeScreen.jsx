@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { collection, orderBy, query, getDocs } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+
+import database from "../config/firebase";
 
 import GoalModal from "../components/goalModal";
 
@@ -39,6 +42,31 @@ const styles = StyleSheet.create({
 
 const GoalsHomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [allGoals, setAllGoals] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const q = query(collection(database, "goals"), orderBy("createdAt", "desc"));
+        const collectionRef = await getDocs(q);
+        // const collectionRef = database.collection("products");
+        // const snapshot = await collectionRef.get();
+        const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setAllGoals(fetchedData);
+
+        return () => unsubscribe(); // Detach listener
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const Item = ({ name }) => (
+    <View >
+      <Text >{name}</Text>
+    </View>
+  );
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -55,6 +83,12 @@ const GoalsHomeScreen = () => {
           </View>
         </View>
       </View>
+
+      <FlatList
+        data={allGoals}
+        renderItem={({ item }) => <Item name={item.title} />}
+        keyExtractor={(item) => item.id}
+      />
 
       <View>
         <TouchableOpacity style={styles.add} onPress={() => setModalVisible(true)} >
