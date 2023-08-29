@@ -1,3 +1,4 @@
+import { text } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   button: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#333533",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
@@ -35,14 +36,17 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
+    color: "#CFDBD5",
+    fontSize: 24,
+    fontWeight: "bold",
   },
   icon: {
     position: "absolute",
     bottom: -8,
     right: -10,
-    opacity: 0.5,
     transform: [{ rotate: "25deg" }],
-  }
+  },
+
 });
 
 const HomeScreen = (props) => {
@@ -57,24 +61,26 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Concerned for someone else</Text>
         </TouchableOpacity>
       </View>
+
+
       <View style={styles.container}>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Reminders</Text>
-          <FontAwesomeIcon icon="bell" size={60} color="black" style={styles.icon} />
+          <FontAwesomeIcon icon="bell" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() =>
             props.navigation.navigate("Goals")
           } style={[styles.buttonGrid, styles.button]}>
-          <Text style={styles.buttonText}>Daily Goals</Text>
-          <FontAwesomeIcon icon="check-circle" size={60} color="black" style={styles.icon} />
+          <Text style={styles.buttonText}>Goals</Text>
+          <FontAwesomeIcon icon="square-check" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Journal</Text>
-          <FontAwesomeIcon icon="book" size={60} color="black" style={styles.icon} />
+          <FontAwesomeIcon icon="book" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Settings</Text>
-          <FontAwesomeIcon icon="gear" size={60} color="black" style={styles.icon} />
+          <FontAwesomeIcon icon="gear" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>

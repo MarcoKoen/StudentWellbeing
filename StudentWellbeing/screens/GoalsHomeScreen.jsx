@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+
+import GoalModal from "../components/goalModal";
 
 const styles = StyleSheet.create({
   hero: {
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   add: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#333533",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
@@ -35,6 +38,8 @@ const styles = StyleSheet.create({
 });
 
 const GoalsHomeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={styles.hero}>
@@ -52,10 +57,12 @@ const GoalsHomeScreen = () => {
       </View>
 
       <View>
-        <TouchableOpacity style={styles.add}>
-         <FontAwesomeIcon icon="plus" size={32} color="black"/>
+        <TouchableOpacity style={styles.add} onPress={() => setModalVisible(true)} >
+         <FontAwesomeIcon icon="plus" size={32} color="#F5CB5C"/>
         </TouchableOpacity>
       </View>
+
+      <GoalModal open={modalVisible} setOpen={setModalVisible}/>
     </View>
   );
 };
