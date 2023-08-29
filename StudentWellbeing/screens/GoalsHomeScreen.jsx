@@ -10,6 +10,7 @@ import GoalModal from "../components/goalModal";
 const styles = StyleSheet.create({
   hero: {
     padding: 16,
+    marginVertical: 8,
     backgroundColor: "#ccc",
     width: "80%", // Adjust the width as needed for 2 columns
     height: "25%",
@@ -38,6 +39,29 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
+  goalList: {
+    flexGrow: 1,
+    width: "80%",
+    height: "25",
+    overflow: "scroll",
+  },
+  indivualGoal: {
+    backgroundColor: "#333533",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%", // Adjust the width as needed for 2 columns
+    height: 50,
+    borderRadius: 8,
+    marginVertical: 8,
+    overflow: "hidden",
+  
+  },
+  indivualGoalText: {
+    textAlign: "center",
+    color: "#CFDBD5",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
 });
 
 const GoalsHomeScreen = () => {
@@ -63,8 +87,8 @@ const GoalsHomeScreen = () => {
   }, []);
 
   const Item = ({ name }) => (
-    <View >
-      <Text >{name}</Text>
+    <View style={styles.indivualGoal}>
+      <Text style={styles.indivualGoalText}>{name}</Text>
     </View>
   );
 
@@ -84,11 +108,14 @@ const GoalsHomeScreen = () => {
         </View>
       </View>
 
+      <View style={{width:"100%", height: "40%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
       <FlatList
         data={allGoals}
         renderItem={({ item }) => <Item name={item.title} />}
         keyExtractor={(item) => item.id}
+        style={styles.goalList}
       />
+      </View>
 
       <View>
         <TouchableOpacity style={styles.add} onPress={() => setModalVisible(true)} >
