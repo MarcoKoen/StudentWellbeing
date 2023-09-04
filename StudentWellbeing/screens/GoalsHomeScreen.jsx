@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import database from "../config/firebase";
 
+import GoalCreateModal from "../components/goalCreateModal";
 import GoalModal from "../components/goalModal";
 
 const styles = StyleSheet.create({
@@ -65,7 +66,9 @@ const styles = StyleSheet.create({
 });
 
 const GoalsHomeScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [createModalVisible, setCreateModalVisible] = useState(false);
+  const [goalModalVisible, setGoalModalVisible] = useState(false);
+  const [goal, setGoal] = useState({});
   const [allGoals, setAllGoals] = useState([]);
 
   useEffect(() => {
@@ -73,8 +76,6 @@ const GoalsHomeScreen = () => {
       try {
         const q = query(collection(database, "goals"), orderBy("createdAt", "desc"));
         const collectionRef = await getDocs(q);
-        // const collectionRef = database.collection("products");
-        // const snapshot = await collectionRef.get();
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setAllGoals(fetchedData);
 
@@ -86,9 +87,20 @@ const GoalsHomeScreen = () => {
     fetchProducts();
   }, []);
 
-  const Item = ({ name }) => (
+  //when a goal is selected, set the goal state to that goal and open the modal, 
+  //check if the goal state is empty to avoid initial render
+  useEffect(() => {
+    const goalModal = async () => {
+    Object.keys(goal).length > 0 ? setGoalModalVisible(true) : setGoalModalVisible(false);
+    };
+    goalModal();
+  }, [goal]);
+
+  const Item = ({ item }) => (
     <View style={styles.indivualGoal}>
-      <Text style={styles.indivualGoalText}>{name}</Text>
+      <TouchableOpacity style={styles.indivualGoal} onPress={() => {setGoal(item)}}>
+      <Text style={styles.indivualGoalText}>{item.title}</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -111,19 +123,21 @@ const GoalsHomeScreen = () => {
       <View style={{width:"100%", height: "40%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
       <FlatList
         data={allGoals}
-        renderItem={({ item }) => <Item name={item.title} />}
+        renderItem={({ item }) => <Item item={item}/>}
         keyExtractor={(item) => item.id}
         style={styles.goalList}
       />
       </View>
 
       <View>
-        <TouchableOpacity style={styles.add} onPress={() => setModalVisible(true)} >
+        <TouchableOpacity style={styles.add} onPress={() => setCreateModalVisible(true)} >
          <FontAwesomeIcon icon="plus" size={32} color="#F5CB5C"/>
         </TouchableOpacity>
       </View>
 
-      <GoalModal open={modalVisible} setOpen={setModalVisible}/>
+      <GoalCreateModal open={createModalVisible} setOpen={setCreateModalVisible}/>
+      <GoalModal open={goalModalVisible} setOpen={setGoalModalVisible} goal={goal}/>
+
     </View>
   );
 };
