@@ -75,7 +75,9 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Goals</Text>
           <FontAwesomeIcon icon="square-check" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
+        <TouchableOpacity onPress={() => 
+            props.navigation.navigate("Journal")
+          }style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Journal</Text>
           <FontAwesomeIcon icon="book" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
