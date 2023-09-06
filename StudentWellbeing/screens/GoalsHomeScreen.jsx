@@ -85,7 +85,7 @@ const GoalsHomeScreen = () => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [, createModalVisible]);
 
   //when a goal is selected, set the goal state to that goal and open the modal, 
   //check if the goal state is empty to avoid initial render
@@ -99,15 +99,16 @@ const GoalsHomeScreen = () => {
   const Item = ({ item }) => (
     <View style={styles.indivualGoal}>
       <TouchableOpacity style={styles.indivualGoal} onPress={() => {setGoal(item)}}>
-      <Text style={styles.indivualGoalText}>{item.title}</Text>
+        <Text style={styles.indivualGoalText}>{item.title.toUpperCase()}</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View 
+    style={{ display: "flex", alignItems: "center"}}
+    >
       <View style={styles.hero}>
-        <Text>"QUOTE HERE"</Text>
         <View style={styles.heroStats}>
           <View style={styles.stat}>
             <FontAwesomeIcon icon="check-circle" size={24} color="black" />
@@ -117,10 +118,14 @@ const GoalsHomeScreen = () => {
             <FontAwesomeIcon icon="check-circle" size={24} color="black" />
             <Text>ToDo: 0</Text>
           </View>
+          <View style={styles.stat}>
+            <FontAwesomeIcon icon="check-circle" size={24} color="black" />
+            <Text>Total: {allGoals.length}</Text>
+          </View>
         </View>
       </View>
 
-      <View style={{width:"100%", height: "40%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
+      <View style={{width:"100%", height: "60%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
       <FlatList
         data={allGoals}
         renderItem={({ item }) => <Item item={item}/>}
