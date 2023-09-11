@@ -1,4 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Button, } from "react-native";
+import React, { useState, useEffect } from "react";
+import JournalEntry from "../components/journalModal"
 
 const styles = StyleSheet.create({
     entries: {
@@ -44,6 +46,8 @@ const styles = StyleSheet.create({
 
 const Journal = () => {
 
+  const [modalVisible, setModalVisible] = useState(false);
+
     const journalEntries = [
         {
           title: "First Entry",
@@ -67,7 +71,7 @@ const Journal = () => {
   const entryElements = journalEntries.map((entry, index) => (
     <View key={index} style={styles.entries}>
       <Text style={styles.heading}>{entry.title}</Text>
-      <Text style= {styles.content}>{entry.content}</Text>
+      <Text style= {styles.content} ellipsozeMode='tail' numberOfLines={4}>{entry.content}</Text>
     </View>
   ));
 
@@ -75,9 +79,10 @@ return (
     <>
     <View style={styles.pageStyle}>
     <TouchableOpacity style={[styles.button]}>
-        <Text style={styles.buttonText}>New Entry</Text>
+        <JournalEntry open={modalVisible} setOpen={setModalVisible}/>
+        <Text style={styles.buttonText} onPress={()=>setModalVisible(true)}>New Entry</Text>
     </TouchableOpacity>
-    <View style = {styles.gridContainer}>
+    <View style ={styles.gridContainer}>
         {entryElements}
     </View>
     </View>
