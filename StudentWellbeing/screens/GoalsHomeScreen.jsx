@@ -70,6 +70,7 @@ const GoalsHomeScreen = () => {
   const [goalModalVisible, setGoalModalVisible] = useState(false);
   const [goal, setGoal] = useState({});
   const [allGoals, setAllGoals] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -78,7 +79,7 @@ const GoalsHomeScreen = () => {
         const collectionRef = await getDocs(q);
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setAllGoals(fetchedData);
-
+        setLoading(false);
         return () => unsubscribe(); // Detach listener
       } catch (err) {
         console.log(err);
@@ -125,14 +126,16 @@ const GoalsHomeScreen = () => {
         </View>
       </View>
 
-      <View style={{width:"100%", height: "60%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
-      <FlatList
+    {/* if loading is true, display loading text, else display the flatlist */}
+    <View style={{width:"100%", height: "60%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
+    {loading ? <Text>Loading...</Text> : <FlatList
         data={allGoals}
         renderItem={({ item }) => <Item item={item}/>}
         keyExtractor={(item) => item.id}
         style={styles.goalList}
-      />
+      />}
       </View>
+
 
       <View>
         <TouchableOpacity style={styles.add} onPress={() => setCreateModalVisible(true)} >
