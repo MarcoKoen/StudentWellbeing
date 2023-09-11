@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TextInput,
-} from "react-native";
+import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
 
 import database from "../config/firebase";
 
-const JournalEntry = (props) => {
-  const [entry, setEntry] = useState({
+const JournalCreateModal = (props) => {
+  const [journal, setJournal] = useState({
     title: "",
     description: "",
     createdAt: new Date(),
@@ -23,48 +17,42 @@ const JournalEntry = (props) => {
   const navigation = useNavigation();
 
   const onPress = async () => {
-    await addDoc(collection(database, "journal"), entry);
-    naviagation.navigage("Home");
+    // Add a new product to the Firestore database
+    try{
+      if(!(journal.title.length > 0 && journal.description.length > 0)){
+        Alert.alert("Please fill out all fields");
+        return 
+      }
+        await addDoc(collection(database, "journal"), journal)
+        props.setOpen(false);
+    }catch(e){
+      console.log(e);
+    }
   };
 
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={props.open}
       onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
         props.setOpen(false);
-      }}
-    >
+      }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>New Journal Entry</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(title) => setEntry({ ...goal, title: title })}
-            placeholder="Title"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(description) =>
-              setEntry({ ...goal, description: description })
-            }
-            placeholder="More Info"
-          />
+          <Text style={styles.modalTitle}>New Journal Entry</Text>
+          <TextInput style={styles.input} onChangeText={(title) => setJournal({ ...journal, title: title })} placeholder="Title" />
+          <TextInput style={[styles.input, styles.description]} onChangeText={(description) => setJournal({ ...journal, description: description })} multiline={true} placeholder="Goal Description" />
+
           <TouchableOpacity
-            style={[styles.button, styles.buttonClose]}
+            style={[styles.exitButton, styles.buttonClose]}
             onPress={() => {
               props.setOpen(false);
-            }}
-          >
-            <Text style={styles.textStyle}>Hide Modal</Text>
+            }}>
+            <FontAwesomeIcon icon="x" style={[styles.x, styles.icon]} />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonClose]}
-            onPress={onPress}
-          >
-            <Text style={styles.textStyle}>Save</Text>
+          <TouchableOpacity style={[styles.button, styles.buttonClose, styles.buttonSave]} onPress={onPress}>
+            <Text style={[styles.textStyle, styles.icon]}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -81,9 +69,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {
+    position: "absolute",
+    top: 10,
     margin: 20,
     width: "80%",
-    height: "70%",
+    height: 600,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -102,11 +92,33 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#333533",
+  },
+  buttonSave: {
+    position: "absolute",
+    bottom: 5,
+    margin: "auto",
+    width: 150
+  },
+  exitButton: {
+    position: "absolute",
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    top: -10,
+    right: -10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  x: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  icon: {
+    color: "#F5CB5C"
   },
   textStyle: {
     color: "white",
@@ -117,13 +129,22 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   input: {
     height: 40,
-    width: "80%",
+    width: 250,
     margin: 12,
     borderWidth: 1,
     padding: 10,
   },
+  description:{
+    height: 300,
+    textAlignVertical: "top",
+  }
 });
 
-export default JournalEntry;
+export default JournalCreateModal;

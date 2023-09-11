@@ -80,6 +80,7 @@ const GoalsHomeScreen = () => {
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setAllGoals(fetchedData);
         setLoading(false);
+        console.log(fetchedData);
         return () => unsubscribe(); // Detach listener
       } catch (err) {
         console.log(err);
