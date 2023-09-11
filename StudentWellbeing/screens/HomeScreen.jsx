@@ -1,6 +1,6 @@
 import { text } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between", // Adjust as needed
-    
   },
   buttonMainParent: {
     flex: 1,
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
   },
   buttonMain: {
     width: "100%", // Adjust the width as needed for 2 columns
-    height: "25%",
+    height: 100,
   },
   buttonGrid: {
     width: "48%", // Adjust the width as needed for 2 columns
@@ -53,7 +52,8 @@ const styles = StyleSheet.create({
 const HomeScreen = (props) => {
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center",backgroundColor: "#E8EDDF" }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 ,backgroundColor: "#E8EDDF"}}>
+   
       <View style={styles.buttonMainParent}>
         <TouchableOpacity style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Daily Check-In</Text>
@@ -83,8 +83,15 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Settings</Text>
           <FontAwesomeIcon icon="gear" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
+        <TouchableOpacity onPress={() =>
+            props.navigation.navigate("Resources")
+          } style={[styles.buttonGrid, styles.button]}>
+          <Text style={styles.buttonText}>Resources</Text>
+          <FontAwesomeIcon icon="link" size={60} color="#F5CB5C" style={styles.icon} />
+        </TouchableOpacity>
       </View>
-    </View>
+ 
+    </ScrollView>
   );
 };
 
