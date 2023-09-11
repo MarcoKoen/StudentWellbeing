@@ -8,9 +8,9 @@ import JournalScreen from "./screens/JournalScreen";
 const Stack = createNativeStackNavigator();
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook } from '@fortawesome/free-solid-svg-icons'
+import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook)
+library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX)
 
 const App = () => {
   return (
