@@ -14,6 +14,8 @@ const JournalCreateModal = (props) => {
     createdAt: new Date(),
   });
 
+  console.log(props.itemId)
+
   const navigation = useNavigation();
 
   const onPress = async () => {

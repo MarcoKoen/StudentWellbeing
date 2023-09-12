@@ -46,6 +46,7 @@ const Journal = () => {
 
   const [createJournalVisible, setCreateJournalVisible] = useState(false);
   const [journalEntries, setJournalEntries] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -56,7 +57,6 @@ const Journal = () => {
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setJournalEntries(fetchedData);
         setLoading(false);
-        console.log(fetchedData);
         return () => unsubscribe();
         }catch (err) {
           console.log(err);
@@ -77,12 +77,24 @@ const Journal = () => {
 
 
     // Use map to create an array of JSX elements
-  const Item = ({ item }) => (
-    <View style={styles.entries}>
-      <Text style={styles.heading}>{item.title}</Text>
-      <Text style= {styles.content} ellipsizeMode='tail' numberOfLines={4}>{item.description}</Text>
-    </View>
-  );
+    const Item = ({ item }) => {
+      const handleItemPress = (itemId) => {
+        setCreateJournalVisible(true);
+        setIsEditing(true);
+        console.log(itemId); // Log item.id here
+      };
+    
+      return (
+        <View style={styles.entries}>
+          <TouchableOpacity onPress={() => handleItemPress(item.id)}>
+            <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible} itemId={item.id} />
+            <Text style={styles.heading}>{item.title}</Text>
+            <Text style={styles.content} ellipsizeMode='tail' numberOfLines={4}>{item.description}</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    };
+    
 
 return (
     <>
@@ -104,6 +116,7 @@ return (
     </View>
     </ScrollView>
     </View>
+    
     </>
 );
 
