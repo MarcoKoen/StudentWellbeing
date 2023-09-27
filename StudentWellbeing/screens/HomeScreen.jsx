@@ -55,7 +55,9 @@ const HomeScreen = (props) => {
     <ScrollView contentContainerStyle={{ flexGrow: 1 ,backgroundColor: "#E8EDDF"}}>
    
       <View style={styles.buttonMainParent}>
-        <TouchableOpacity style={[styles.buttonMain, styles.button]}>
+        <TouchableOpacity  onPress={() =>
+            props.navigation.navigate("DailyCheckIn")
+          } style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Daily Check-In</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonMain, styles.button]}>
@@ -91,6 +93,7 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Resources</Text>
           <FontAwesomeIcon icon="link" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
+
       </View>
  
     </ScrollView>

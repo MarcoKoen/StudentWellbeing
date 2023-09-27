@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import GoalsHomeScreen from "./screens/GoalsHomeScreen";
 import JournalScreen from "./screens/JournalScreen";
 import ResourcesScreen from "./screens/ResourcesScreen";
+import DailyScreen from "./screens/DailyScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const App = () => {
         <Stack.Screen name="Goals" component={GoalsHomeScreen}/>
         <Stack.Screen name="Journal" component={JournalScreen}/>
         <Stack.Screen name="Resources" component={ResourcesScreen}/>
+        <Stack.Screen name="DailyCheckIn" component={DailyScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
