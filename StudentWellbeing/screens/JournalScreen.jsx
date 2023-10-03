@@ -60,43 +60,44 @@ const Journal = () => {
         const collectionRef = await getDocs(q);
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setJournalEntries(fetchedData);
-        setLoading(false);
+        setLoading(false)
         return () => unsubscribe();
         }catch (err) {
           console.log(err);
         }
       };
         fetchJournalData();
-      }, [,createJournalVisible]);
+      }, [,createJournalVisible, editJournalVisible]);
 
 
     // Use map to create an array of JSX elements
     const Item = ({ item }) => {
       const handleItemPress = (itemId) => {
-        setEditJournalVisible(true);
         setJournal({item})
+        
       };
     
       return (
         <View style={styles.entries}>
-          <TouchableOpacity onPress={() => handleItemPress(item.id)}>
+          {editJournalVisible ? <JournalUpdate open={editJournalVisible} setOpen={setEditJournalVisible} item={journal}/> : null}
+          <TouchableOpacity onPress={() => {handleItemPress(item.id), setEditJournalVisible(true)}}>
             <Text style={styles.heading}>{item.title}</Text>
             <Text style={styles.content} ellipsizeMode='tail' numberOfLines={4}>{item.description}</Text>
           </TouchableOpacity>
         </View>
       );
+      
     };
     
 
 return (
+  <View style={styles.pageStyle}>
+    {loading ? <Text>Loading....</Text> : 
     <>
-    
-    <View style={styles.pageStyle}>
     <TouchableOpacity style={[styles.button]}>
         <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible}/>
         <Text style={styles.buttonText} onPress={()=>setCreateJournalVisible(true)}>New Entry</Text>
     </TouchableOpacity>
-    <JournalUpdate open={editJournalVisible} setOpen={setEditJournalVisible} item={journal}/>
     <ScrollView >
       <View>
         <FlatList
@@ -107,9 +108,9 @@ return (
         />
     </View>
     </ScrollView>
+    </>}
     </View>
-    
-    </>
+
 );
 
 }
