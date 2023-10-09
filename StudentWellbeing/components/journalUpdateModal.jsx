@@ -28,9 +28,6 @@ const journalUpdate = (props) => {
     }
   }, [props.item.item]);
 
-  console.log(title);
-  console.log(description);
-  console.log(props.open)
 
   const updateEntry = async () => {
     try {

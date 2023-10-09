@@ -60,7 +60,9 @@ const HomeScreen = (props) => {
           } style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Daily Check-In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonMain, styles.button]}>
+        <TouchableOpacity onPress={() =>
+            props.navigation.navigate("ConcernedForSomeone")
+          } style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Concerned for someone else</Text>
         </TouchableOpacity>
       </View>

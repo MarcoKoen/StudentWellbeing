@@ -6,6 +6,7 @@ import GoalsHomeScreen from "./screens/GoalsHomeScreen";
 import JournalScreen from "./screens/JournalScreen";
 import ResourcesScreen from "./screens/ResourcesScreen";
 import DailyScreen from "./screens/DailyScreen";
+import SomeoneElseScreen from "./screens/SomeoneElseScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const App = () => {
         <Stack.Screen name="Journal" component={JournalScreen}/>
         <Stack.Screen name="Resources" component={ResourcesScreen}/>
         <Stack.Screen name="DailyCheckIn" component={DailyScreen}/>
+        <Stack.Screen name="ConcernedForSomeone" component={SomeoneElseScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
