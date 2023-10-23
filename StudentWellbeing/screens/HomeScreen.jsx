@@ -53,7 +53,6 @@ const HomeScreen = (props) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 ,backgroundColor: "#E8EDDF"}}>
-   
       <View style={styles.buttonMainParent}>
         <TouchableOpacity  onPress={() =>
             props.navigation.navigate("DailyCheckIn")
@@ -66,7 +65,6 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Concerned for someone else</Text>
         </TouchableOpacity>
       </View>
-
 
       <View style={styles.container}>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
