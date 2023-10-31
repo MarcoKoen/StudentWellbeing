@@ -12,9 +12,9 @@ import UrgentScreen from "./screens/UrgentScreen";
 const Stack = createNativeStackNavigator();
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp, faCircleExclamation, faPhone } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp)
+library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp, faCircleExclamation, faPhone )
 
 const App = () => {
   return (
