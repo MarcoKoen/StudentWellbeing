@@ -27,7 +27,7 @@ const ViewRatingsModal = (props) => {
     <ModalParent open={props.open} setOpen={props.setOpen}>
       <View style={styles.modalContent}>
         <Text>Daily Check-In Ratings</Text>
-        <Text>{date.toDate().toDateString()}</Text>
+        {date && <Text>{date.toDate().toDateString()}</Text>}
       </View>
       <FlatList data={questions} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.category} style={styles.goalList} />
     </ModalParent>
