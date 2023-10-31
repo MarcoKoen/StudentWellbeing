@@ -4,10 +4,14 @@ import Slider from "@react-native-community/slider";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { collection, orderBy, query, getDocs } from "firebase/firestore";
 import database from "../config/firebase";
+
 import DailyCheckIn from "../components/dailyCheckIn";
+import ViewRatingsModal from "../components/viewRatingsModal";
 
 const DailyScreen = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openDateModal, setOpenDateModal] = useState(false);
+  const [selectedDate, setSelectedDate] = useState({});  
   const [loading, setLoading] = useState(true);
   const [prevResponses, setPrevResponses] = useState([]);
   const [buttonText, setButtonText] = useState("Check In Today");
@@ -57,6 +61,12 @@ const DailyScreen = () => {
     };
     fetchProducts();
   }, [openModal]);
+
+  const handleDatePress = (item) => {
+    console.log(item);
+    setSelectedDate(item);
+    setOpenDateModal(true);
+  };
 
   useEffect(() => {
     const checkDate = () => {
@@ -150,6 +160,7 @@ const DailyScreen = () => {
       </View>
 
       <DailyCheckIn open={openModal} setOpen={toggleModal} questions={questions} />
+      <ViewRatingsModal open={openDateModal} setOpen={setOpenDateModal} questions={questions} ratings={selectedDate.ratings} date={selectedDate.createdAt} />
     </View>
   );
 };

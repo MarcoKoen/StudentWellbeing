@@ -41,6 +41,7 @@ const DailyCheckIn = (props) => {
       <TouchableOpacity>
         <Text>{item.question}</Text>
         <View style={styles.ratingContainer}>
+          {/* chatGPT assisted */}
           {[0, 1, 2, 3, 4, 5].map((value) => (
             <TouchableOpacity
               key={value}
