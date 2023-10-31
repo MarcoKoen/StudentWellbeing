@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Button, FlatList, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
-import JournalEntry from "../components/journalModal"
+import JournalEntry from "../components/journalModal";
+import JournalUpdate from "../components/journalUpdateModal";
 import { collection, orderBy, query, getDocs } from "firebase/firestore";
 
 import database from "../config/firebase";
@@ -48,6 +49,9 @@ const Journal = () => {
   const [journalEntries, setJournalEntries] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [editJournalVisible, setEditJournalVisible] = useState(false);
+  const [journal, setJournal] = useState({});
+  
 
     useEffect(() => {
     const fetchJournalData = async () => {
@@ -56,55 +60,44 @@ const Journal = () => {
         const collectionRef = await getDocs(q);
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setJournalEntries(fetchedData);
-        setLoading(false);
+        setLoading(false)
         return () => unsubscribe();
         }catch (err) {
           console.log(err);
         }
       };
         fetchJournalData();
-      }, [,createJournalVisible]);
-      
-
-    // //when a goal is selected, set the goal state to that goal and open the modal, 
-    // //check if the goal state is empty to avoid initial render
-    // useEffect(() => {
-    //   const journalModal = async () => {
-    //   Object.keys(goal).length > 0 ? setGoalModalVisible(true) : setGoalModalVisible(false);
-    //   };
-    //   goalModal();
-    // }, [goal]);
+      }, [,createJournalVisible, editJournalVisible]);
 
 
     // Use map to create an array of JSX elements
     const Item = ({ item }) => {
       const handleItemPress = (itemId) => {
-        setCreateJournalVisible(true);
-        setIsEditing(true);
-        console.log(itemId); // Log item.id here
+        setJournal({item})
+        
       };
     
       return (
         <View style={styles.entries}>
-          <TouchableOpacity onPress={() => handleItemPress(item.id)}>
-            <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible} itemId={item.id} />
+          {editJournalVisible ? <JournalUpdate open={editJournalVisible} setOpen={setEditJournalVisible} item={journal}/> : null}
+          <TouchableOpacity onPress={() => {handleItemPress(item.id), setEditJournalVisible(true)}}>
             <Text style={styles.heading}>{item.title}</Text>
             <Text style={styles.content} ellipsizeMode='tail' numberOfLines={4}>{item.description}</Text>
           </TouchableOpacity>
         </View>
       );
+      
     };
     
 
 return (
+  <View style={styles.pageStyle}>
+    {loading ? <Text>Loading....</Text> : 
     <>
-    
-    <View style={styles.pageStyle}>
     <TouchableOpacity style={[styles.button]}>
         <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible}/>
         <Text style={styles.buttonText} onPress={()=>setCreateJournalVisible(true)}>New Entry</Text>
     </TouchableOpacity>
-
     <ScrollView >
       <View>
         <FlatList
@@ -115,9 +108,9 @@ return (
         />
     </View>
     </ScrollView>
+    </>}
     </View>
-    
-    </>
+
 );
 
 }

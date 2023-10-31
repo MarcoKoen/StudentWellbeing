@@ -6,11 +6,13 @@ import GoalsHomeScreen from "./screens/GoalsHomeScreen";
 import JournalScreen from "./screens/JournalScreen";
 import ResourcesScreen from "./screens/ResourcesScreen";
 import DailyScreen from "./screens/DailyScreen";
+import SomeoneElseScreen from "./screens/SomeoneElseScreen";
+import UrgentScreen from "./screens/UrgentScreen";
 
 const Stack = createNativeStackNavigator();
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp, faT } from '@fortawesome/free-solid-svg-icons'
+import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp)
 
@@ -23,6 +25,8 @@ const App = () => {
         <Stack.Screen name="Journal" component={JournalScreen}/>
         <Stack.Screen name="Resources" component={ResourcesScreen}/>
         <Stack.Screen name="DailyCheckIn" component={DailyScreen}/>
+        <Stack.Screen name="ConcernedForSomeone" component={SomeoneElseScreen}/>
+        <Stack.Screen name="Urgent" component={UrgentScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
   );

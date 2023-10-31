@@ -46,25 +46,35 @@ const styles = StyleSheet.create({
     right: -10,
     transform: [{ rotate: "25deg" }],
   },
+  urgentButton: {
+    backgroundColor: "#333533",
+    borderRadius: 16,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 20, // Adjust as needed
+    right: 20, // Adjust as needed
+    padding: 4,
+  }
 
 });
 
 const HomeScreen = (props) => {
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView contentContainerStyle={{ flexGrow: 1 ,backgroundColor: "#E8EDDF"}}>
-   
       <View style={styles.buttonMainParent}>
         <TouchableOpacity  onPress={() =>
             props.navigation.navigate("DailyCheckIn")
           } style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Daily Check-In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonMain, styles.button]}>
+        <TouchableOpacity onPress={() =>
+            props.navigation.navigate("ConcernedForSomeone")
+          } style={[styles.buttonMain, styles.button]}>
           <Text style={styles.buttonText}>Concerned for someone else</Text>
         </TouchableOpacity>
       </View>
-
 
       <View style={styles.container}>
         <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
@@ -93,10 +103,18 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Resources</Text>
           <FontAwesomeIcon icon="link" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
-
+      
       </View>
- 
+
     </ScrollView>
+
+    <TouchableOpacity
+        onPress={()=> (props.navigation.navigate("Urgent"))}
+        style={styles.urgentButton}
+      >
+        <FontAwesomeIcon icon={"circle-exclamation"} size={40} color="red" />
+      </TouchableOpacity>
+    </View>
   );
 };
 
