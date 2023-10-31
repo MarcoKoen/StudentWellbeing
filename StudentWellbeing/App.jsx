@@ -10,9 +10,9 @@ import DailyScreen from "./screens/DailyScreen";
 const Stack = createNativeStackNavigator();
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink } from '@fortawesome/free-solid-svg-icons'
+import { faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp, faT } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink)
+library.add(faSquareCheck, faCheck, faCheckCircle, faPlus, faGear, faBell, faBook, faX, faLink, faArrowLeft, faArrowRight, faThumbsUp)
 
 const App = () => {
   return (

@@ -18,7 +18,7 @@ const GoalCreateModal = (props) => {
   const navigation = useNavigation();
 
   const onPress = async () => {
-    // Add a new product to the Firestore database
+    // Add a new goal to the Firestore database
     try{
       if(!(goal.title.length > 0 && goal.description.length > 0)){
         Alert.alert("Please fill out all fields");
