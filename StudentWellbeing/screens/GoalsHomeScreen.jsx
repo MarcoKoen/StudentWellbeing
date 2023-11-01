@@ -83,14 +83,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 16,
   },
+  filterButton: {
+    backgroundColor: "#F5CB5C",
+    borderRadius: 8,
+    padding: 8,
+    margin: 8,
+  },
+  filterButtonText: {
+    color: "#333533",
+  },
 });
 
 const GoalsHomeScreen = () => {
+  // Define state variables for the filter
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [goalModalVisible, setGoalModalVisible] = useState(false);
   const [goal, setGoal] = useState({});
   const [allGoals, setAllGoals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentFilter, setCurrentFilter] = useState("all"); // "all", "todo", or "completed"
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -114,6 +125,17 @@ const GoalsHomeScreen = () => {
     goalModal();
   }, [goal]);
 
+  // Define filteredGoals based on the current filter
+  const filteredGoals = () => {
+    if (currentFilter === "todo") {
+      return allGoals.filter((goal) => !goal.completed);
+    } else if (currentFilter === "completed") {
+      return allGoals.filter((goal) => goal.completed);
+    } else {
+      return allGoals;
+    }
+  };
+
   const todoCount = allGoals.filter((goal) => !goal.completed).length;
   const completedCount = allGoals.filter((goal) => goal.completed).length;
 
@@ -132,28 +154,52 @@ const GoalsHomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Goals</Text>
-      </View>
-      <View style={styles.statContainer}>
-        <View style={styles.statBox}>
-          <Text style={styles.statText}>ToDo</Text>
-          <Text style={styles.statText}>{todoCount}</Text>
+        <View style={styles.statContainer}>
+          <View style={styles.statBox}>
+            <Text style={styles.statText}>ToDo</Text>
+            <Text style={styles.statText}>{todoCount}</Text>
+          </View>
+          <View style={styles.statBox}>
+            <Text style={styles.statText}>Completed</Text>
+            <Text style={styles.statText}>{completedCount}</Text>
+          </View>
         </View>
-        <View style={styles.statBox}>
-          <Text style={styles.statText}>Completed</Text>
-          <Text style={styles.statText}>{completedCount}</Text>
-        </View>
       </View>
+
+      {/* Filter buttons */}
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setCurrentFilter("all")}
+        >
+          <Text style={styles.filterButtonText}>All</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setCurrentFilter("todo")}
+        >
+          <Text style={styles.filterButtonText}>Todo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setCurrentFilter("completed")}
+        >
+          <Text style={styles.filterButtonText}>Completed</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={{ flex: 1, width: "80%", paddingVertical: 8 }}>
         {loading ? (
           <Text style={styles.loadingText}>Loading...</Text>
         ) : (
           <FlatList
-            data={allGoals}
+            data={filteredGoals()}
             renderItem={({ item }) => <Item item={item} />}
             keyExtractor={(item) => item.id}
           />
         )}
       </View>
+
       <TouchableOpacity style={styles.addGoalButton} onPress={() => setCreateModalVisible(true)}>
         <FontAwesomeIcon icon="plus" size={32} color="#333533" />
       </TouchableOpacity>
