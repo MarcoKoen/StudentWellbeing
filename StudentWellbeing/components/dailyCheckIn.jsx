@@ -24,7 +24,6 @@ const DailyCheckIn = (props) => {
   };
 
   const subitResponses = async () => {
-    console.log(ratings);
     try {
       await addDoc(collection(database, "dailyCheckIn"), {
         createdAt: new Date(),

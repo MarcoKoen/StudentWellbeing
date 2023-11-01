@@ -53,7 +53,7 @@ const DailyScreen = () => {
         const q = query(collection(database, "dailyCheckIn"), orderBy("createdAt"));
         const collectionRef = await getDocs(q);
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setPrevResponses(fetchedData);
+        setPrevResponses(fetchedData.reverse());
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -63,7 +63,6 @@ const DailyScreen = () => {
   }, [openModal]);
 
   const handleDatePress = (item) => {
-    console.log(item);
     setSelectedDate(item);
     setOpenDateModal(true);
   };
