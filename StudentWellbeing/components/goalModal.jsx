@@ -49,6 +49,86 @@ const GoalModal = (props) => {
     }
   };
 
+  const styles = StyleSheet.create({
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalView: {
+      margin: 20,
+      width: "80%",
+      height: "70%",
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 20, // Reduced padding for a cleaner look
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    modalText: {
+      marginBottom: 20, // Increased margin for better spacing
+      textAlign: "center",
+      fontSize: 24, // Increased font size
+      fontWeight: "bold",
+      color: "#333", // Dark text color
+    },
+    input: {
+      height: 40,
+      width: "100%", // Expanded input width
+      marginVertical: 10, // Increased vertical margin
+      borderWidth: 1,
+      borderColor: "#ccc", // Light border color
+      padding: 10,
+      fontSize: 16, // Adjusted font size
+    },
+    description: {
+      height: 150,
+      width: "100%", // Expanded input width
+      marginVertical: 10, // Increased vertical margin
+      borderWidth: 1,
+      borderColor: "#ccc", // Light border color
+      padding: 10,
+      fontSize: 16, // Adjusted font size
+    },
+    checkboxContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 10, // Increased top margin
+    },
+    checkboxLabel: {
+      fontSize: 18, // Adjusted font size
+    },
+    checkbox: {
+      marginLeft: 10, // Increased left margin
+    },
+    buttonContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      marginVertical: 20, // Increased vertical margin
+    },
+    cancelButton: {
+      backgroundColor: "#E74C3C", // Red button color
+    },
+    saveButton: {
+      backgroundColor: "#2ECC71", // Green button color
+      marginLeft: 10, // Adjusted left margin
+    },
+    buttonText: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 18, // Adjusted font size
+      padding: 10,
+    },
+  });
+
   return (
     <Modal
       animationType="fade"
@@ -81,85 +161,22 @@ const GoalModal = (props) => {
             onPress={() => setEditedGoal({ ...editedGoal, completed: !editedGoal.completed })}
           />
 
-          <TouchableOpacity
-            style={[styles.button, styles.buttonClose]}
-            onPress={() => {
-              props.setOpen(false);
-            }}>
-            <Text style={styles.textStyle}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonClose]} onPress={onSave}>
-            <Text style={styles.textStyle}>Save</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, styles.cancelButton]}
+              onPress={() => {
+                props.setOpen(false);
+              }}>
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.saveButton]} onPress={onSave}>
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    //   marginTop: 22,
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalView: {
-    margin: 20,
-    width: "80%",
-    height: "70%",
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  input: {
-    height: 40,
-    width: "80%",
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  checkbox: {
-    height: 40,
-    width: 60,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
 
 export default GoalModal;

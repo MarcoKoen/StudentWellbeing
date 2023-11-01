@@ -66,18 +66,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //   marginTop: 22,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalView: {
     position: "absolute",
-    top: 10,
+    top: 50,
     margin: 20,
-    width: "80%",
-    height: 600,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    width: "90%", // Adjust the width as needed
+    backgroundColor: "#FFF", // White background color
+    borderRadius: 8,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 8,
     padding: 10,
     elevation: 2,
   },
@@ -98,28 +96,29 @@ const styles = StyleSheet.create({
   },
   buttonSave: {
     position: "absolute",
-    bottom: 5,
-    margin: "auto",
-    width: 150
+    bottom: 20, // Adjust the position as needed
+    width: "50%", // Adjust the width as needed
+    borderRadius: 8,
   },
   exitButton: {
     position: "absolute",
-    height: 50,
-    width: 50,
-    borderRadius: 50,
-    top: -10,
-    right: -10,
+    height: 40, // Adjust the size as needed
+    width: 40, // Adjust the size as needed
+    borderRadius: 20,
+    top: -20, // Adjust the position as needed
+    right: -20, // Adjust the position as needed
+    backgroundColor: "#F5CB5C", // Light yellow background color
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   x: {
-    color: "white",
+    color: "#333533", // Dark text color
     fontSize: 24,
     fontWeight: "bold",
   },
   icon: {
-    color: "#F5CB5C"
+    color: "white",
   },
   textStyle: {
     color: "white",
@@ -134,18 +133,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#333533", // Dark text color
   },
   input: {
     height: 40,
-    width: 250,
+    width: "90%", // Adjust the width as needed
     margin: 12,
     borderWidth: 1,
+    borderRadius: 8,
     padding: 10,
   },
-  description:{
+  description: {
     height: 150,
-    textAlignVertical: "top",
-  }
+    width: "90%", // Adjust the width as needed
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+  },
 });
 
 export default GoalCreateModal;

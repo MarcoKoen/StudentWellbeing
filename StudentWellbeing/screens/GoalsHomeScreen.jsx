@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   completedGoal: {
-    borderColor: "green",
-    borderWidth: 4,
+    borderColor: "#4CAF50",  // Lighter green color
+    borderWidth: 6,
   },
   goalText: {
     color: "#CFDBD5",
@@ -116,7 +116,7 @@ const GoalsHomeScreen = () => {
       }
     };
     fetchProducts();
-  }, [createModalVisible]);
+  }, [,createModalVisible, goalModalVisible]);
 
   useEffect(() => {
     const goalModal = () => {
@@ -140,14 +140,11 @@ const GoalsHomeScreen = () => {
   const completedCount = allGoals.filter((goal) => goal.completed).length;
 
   const Item = ({ item }) => (
-    <View style={[styles.goalContainer, item.completed ? styles.completedGoal : null]}>
-      <TouchableOpacity
-        style={styles.goalContainer}
-        onPress={() => setGoal(item)}
+   
+      <TouchableOpacity onPress={() => setGoal(item)} style={[styles.goalContainer, item.completed ? styles.completedGoal : null]}
       >
         <Text style={styles.goalText}>{item.title.toUpperCase()}</Text>
       </TouchableOpacity>
-    </View>
   );
 
   return (
