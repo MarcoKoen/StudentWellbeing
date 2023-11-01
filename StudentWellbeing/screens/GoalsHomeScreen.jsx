@@ -9,59 +9,79 @@ import GoalCreateModal from "../components/goalCreateModal";
 import GoalModal from "../components/goalModal";
 
 const styles = StyleSheet.create({
-  hero: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: "#ccc",
-    width: "80%", // Adjust the width as needed for 2 columns
-    height: "25%",
-    borderRadius: 8,
-    display: "flex",
-    justifyContent: "center",
+  container: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
     alignItems: "center",
   },
-  heroStats: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-  },
-  stat: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  add: {
+  header: {
     backgroundColor: "#333533",
-    justifyContent: "center",
+    width: "100%",
+    paddingVertical: 16,
     alignItems: "center",
+  },
+  headerText: {
+    color: "#F5CB5C",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  statContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    marginTop: 16,
+  },
+  statBox: {
+    flex: 1,
+    backgroundColor: "#2C3E50",
+    borderRadius: 8,
+    padding: 16,
+    marginHorizontal: 8,
+    alignItems: "center",
+  },
+  statText: {
+    color: "#F5CB5C",
+    fontSize: 18,
+  },
+  loadingText: {
+    fontSize: 18,
+    marginTop: 16,
+  },
+  goalContainer: {
+    backgroundColor: "#333533",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  completedGoal: {
+    borderColor: "green",
+    borderWidth: 4,
+  },
+  goalText: {
+    color: "#CFDBD5",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  addGoalButton: {
+    backgroundColor: "#F5CB5C",
     borderRadius: 50,
     height: 50,
     width: 50,
-  },
-  goalList: {
-    flexGrow: 1,
-    width: "80%",
-    height: "25",
-    overflow: "scroll",
-  },
-  indivualGoal: {
-    backgroundColor: "#333533",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%", // Adjust the width as needed for 2 columns
-    height: 50,
-    borderRadius: 8,
-    marginVertical: 8,
-    overflow: "hidden",
-  
-  },
-  indivualGoalText: {
-    textAlign: "center",
-    color: "#CFDBD5",
-    fontSize: 24,
-    fontWeight: "bold",
+    marginTop: 16,
   },
 });
 
@@ -80,73 +100,65 @@ const GoalsHomeScreen = () => {
         const fetchedData = collectionRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setAllGoals(fetchedData);
         setLoading(false);
-        console.log(fetchedData);
-        return () => unsubscribe(); // Detach listener
       } catch (err) {
         console.log(err);
       }
     };
     fetchProducts();
-  }, [, createModalVisible]);
+  }, [createModalVisible]);
 
-  //when a goal is selected, set the goal state to that goal and open the modal, 
-  //check if the goal state is empty to avoid initial render
   useEffect(() => {
-    const goalModal = async () => {
-    Object.keys(goal).length > 0 ? setGoalModalVisible(true) : setGoalModalVisible(false);
+    const goalModal = () => {
+      Object.keys(goal).length > 0 ? setGoalModalVisible(true) : setGoalModalVisible(false);
     };
     goalModal();
   }, [goal]);
 
+  const todoCount = allGoals.filter((goal) => !goal.completed).length;
+  const completedCount = allGoals.filter((goal) => goal.completed).length;
+
   const Item = ({ item }) => (
-    <View style={styles.indivualGoal}>
-      <TouchableOpacity style={styles.indivualGoal} onPress={() => {setGoal(item)}}>
-        <Text style={styles.indivualGoalText}>{item.title.toUpperCase()}</Text>
+    <View style={[styles.goalContainer, item.completed ? styles.completedGoal : null]}>
+      <TouchableOpacity
+        style={styles.goalContainer}
+        onPress={() => setGoal(item)}
+      >
+        <Text style={styles.goalText}>{item.title.toUpperCase()}</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <View 
-    style={{ display: "flex", alignItems: "center"}}
-    >
-      <View style={styles.hero}>
-        <View style={styles.heroStats}>
-          <View style={styles.stat}>
-            <FontAwesomeIcon icon="check-circle" size={24} color="black" />
-            <Text>Completed: 0</Text>
-          </View>
-          <View style={styles.stat}>
-            <FontAwesomeIcon icon="check-circle" size={24} color="black" />
-            <Text>ToDo: 0</Text>
-          </View>
-          <View style={styles.stat}>
-            <FontAwesomeIcon icon="check-circle" size={24} color="black" />
-            <Text>Total: {allGoals.length}</Text>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Goals</Text>
+      </View>
+      <View style={styles.statContainer}>
+        <View style={styles.statBox}>
+          <Text style={styles.statText}>ToDo</Text>
+          <Text style={styles.statText}>{todoCount}</Text>
+        </View>
+        <View style={styles.statBox}>
+          <Text style={styles.statText}>Completed</Text>
+          <Text style={styles.statText}>{completedCount}</Text>
         </View>
       </View>
-
-    {/* if loading is true, display loading text, else display the flatlist */}
-    <View style={{width:"100%", height: "60%", overflow:"scroll", display:'flex', justifyContent:"center", alignItems:"center", padding:"2 0"}}>
-    {loading ? <Text>Loading...</Text> : <FlatList
-        data={allGoals}
-        renderItem={({ item }) => <Item item={item}/>}
-        keyExtractor={(item) => item.id}
-        style={styles.goalList}
-      />}
+      <View style={{ flex: 1, width: "80%", paddingVertical: 8 }}>
+        {loading ? (
+          <Text style={styles.loadingText}>Loading...</Text>
+        ) : (
+          <FlatList
+            data={allGoals}
+            renderItem={({ item }) => <Item item={item} />}
+            keyExtractor={(item) => item.id}
+          />
+        )}
       </View>
-
-
-      <View>
-        <TouchableOpacity style={styles.add} onPress={() => setCreateModalVisible(true)} >
-         <FontAwesomeIcon icon="plus" size={32} color="#F5CB5C"/>
-        </TouchableOpacity>
-      </View>
-
-      <GoalCreateModal open={createModalVisible} setOpen={setCreateModalVisible}/>
-      <GoalModal open={goalModalVisible} setOpen={setGoalModalVisible} goal={goal}/>
-
+      <TouchableOpacity style={styles.addGoalButton} onPress={() => setCreateModalVisible(true)}>
+        <FontAwesomeIcon icon="plus" size={32} color="#333533" />
+      </TouchableOpacity>
+      <GoalCreateModal open={createModalVisible} setOpen={setCreateModalVisible} />
+      <GoalModal open={goalModalVisible} setOpen={setGoalModalVisible} goal={goal} />
     </View>
   );
 };
