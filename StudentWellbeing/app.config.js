@@ -2,9 +2,10 @@ import "dotenv/config"; // Loads environment variables from a .env file into pro
 
 export default {
   expo: {
-    name: "06-playground",
-    slug: "06-playground",
-    version: "1.0.0",
+    owner: "marco1234",
+    name: "studentwellbeing",
+    slug: "studentwellbeing",
+    version: "1.0.1",
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "light",
@@ -18,8 +19,8 @@ export default {
       supportsTablet: true,
     },
     android: {
-      package: "com.yourcompany.yourappname",
-  versionCode: 1,
+      package: "com.student.wellbeing.app",
+      versionCode: 2,
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#ffffff",
@@ -30,7 +31,7 @@ export default {
     },
     extra: {
       eas: {
-        projectId: "8bffb9fb-7690-40eb-99b5-5a41a503c9a8"
+        projectId: "12e793b4-dcb1-4fc5-a307-6640386e9216",
       },
       // Environment variables
       apiKey: process.env.API_KEY,
