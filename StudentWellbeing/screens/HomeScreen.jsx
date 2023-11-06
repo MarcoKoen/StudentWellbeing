@@ -77,10 +77,6 @@ const HomeScreen = (props) => {
       </View>
 
       <View style={styles.container}>
-        <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
-          <Text style={styles.buttonText}>Reminders</Text>
-          <FontAwesomeIcon icon="bell" size={60} color="#F5CB5C" style={styles.icon} />
-        </TouchableOpacity>
         <TouchableOpacity onPress={() =>
             props.navigation.navigate("Goals")
           } style={[styles.buttonGrid, styles.button]}>
@@ -93,17 +89,16 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Journal</Text>
           <FontAwesomeIcon icon="book" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
-          <Text style={styles.buttonText}>Settings</Text>
-          <FontAwesomeIcon icon="gear" size={60} color="#F5CB5C" style={styles.icon} />
-        </TouchableOpacity>
         <TouchableOpacity onPress={() =>
             props.navigation.navigate("Resources")
           } style={[styles.buttonGrid, styles.button]}>
           <Text style={styles.buttonText}>Resources</Text>
           <FontAwesomeIcon icon="link" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
-      
+      <TouchableOpacity style={[styles.buttonGrid, styles.button]}>
+          <Text style={styles.buttonText}>Settings</Text>
+          <FontAwesomeIcon icon="gear" size={60} color="#F5CB5C" style={styles.icon} />
+        </TouchableOpacity>
       </View>
 
     </ScrollView>
