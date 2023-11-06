@@ -127,6 +127,7 @@ const ResourcesScreen = () => {
               {section.links.map((link, linkIndex) => (
                 <TouchableOpacity
                   key={linkIndex}
+                  style={styles.link}
                   onPress={() => handleLinkPress(link.link)}
                 >
                   <Text style={styles.linkText}>{link.title}</Text>
@@ -171,6 +172,9 @@ const styles = StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline',
   },
+  link: {
+    marginBottom: 8,
+  }
 });
 
 export default ResourcesScreen;
