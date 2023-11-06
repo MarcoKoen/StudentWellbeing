@@ -97,6 +97,7 @@ const GoalModal = (props) => {
       borderColor: "#ccc", // Light border color
       padding: 10,
       fontSize: 16, // Adjusted font size
+      textAlignVertical: "top", // Top align text
     },
     checkboxContainer: {
       flexDirection: "row",
