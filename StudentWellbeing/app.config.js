@@ -18,6 +18,8 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: "com.yourcompany.yourappname",
+  versionCode: 1,
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#ffffff",
@@ -27,6 +29,9 @@ export default {
       favicon: "./assets/favicon.png",
     },
     extra: {
+      eas: {
+        projectId: "8bffb9fb-7690-40eb-99b5-5a41a503c9a8"
+      },
       // Environment variables
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,

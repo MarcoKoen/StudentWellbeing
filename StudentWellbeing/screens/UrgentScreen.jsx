@@ -20,7 +20,7 @@ const UrgentScreen = () => {
     <View style={styles.screen}>
         <Text style={styles.text}>Student Success is open Monday to Friday 8:30 am - 5 pm</Text>
         <TouchableOpacity onPress= {()=> triggerCall()}>
-        <FontAwesomeIcon icon="phone" size={30} color="green" style={styles.icon} />
+        <FontAwesomeIcon icon="phone" size={30} style={styles.icon} />
         </TouchableOpacity> 
 
     </View>
@@ -33,36 +33,22 @@ const styles = StyleSheet.create({
         width: "80%",
         textAlign: "center",
         fontWeight: "bold",
-        left: 40,
         color: "black",
         fontSize: 20
     },
-    button: {
-        backgroundColor: "#333533",
-        padding: 5,
-        marginTop: 10,
-        borderRadius: 10,
-        width: "30%",
-    },
-    buttonText: {
-        color: "#CFDBD5",
-        textAlign: "center",
-        fontSize: 20
-    },
-    grid: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        padding: 10,
-    }, 
     screen: {
         display: "flex",
         justifyContent: "center",
+        flexDirection: "column",
         marginTop: "15%",
+        alignItems: "center",
     },
     icon: {
+        marginTop: "15%",
         display: "flex",
-        justifyContent: "center"
+        color: "green",
+        justifyContent: "center",
+        alignItems: "center", // Center horizontally
     }
 })
 
