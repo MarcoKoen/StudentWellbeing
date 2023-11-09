@@ -25,7 +25,7 @@ A mobile app designed to bring support to struggling students
 - Install and select the **R** Release, click next & Finish
   
   
-# Environment Variables
+## Environment Variables
 - Make sure in your **Envoronment variables** on your computer that there is a Variable called **ANDROID_HOME** with the value **c:\Android\AndroidSDK** or something similar.
 
 ### Installation
