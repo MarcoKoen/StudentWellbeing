@@ -1,3 +1,9 @@
+/*
+  File: GoalModal.jsx
+  Description: This file defines the GoalModal component, which allows users to edit an existing goal by providing updated information.
+
+*/
+
 import React, { useState, useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { CheckBox } from "react-native-elements"; // Import CheckBox
@@ -7,6 +13,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 import database from "../config/firebase";
 
+/*
+  GoalModal component
+  @props:
+    - open: Boolean indicating whether the modal is open
+    - setOpen: Function to toggle the modal's open state
+    - goal: The goal to be edited
+*/
 const GoalModal = (props) => {
   const [editedGoal, setEditedGoal] = useState({
     title: "", // Initialize with default values
@@ -137,16 +150,21 @@ const GoalModal = (props) => {
       visible={props.open}
       onRequestClose={() => {
         props.setOpen(false);
-      }}>
+      }}
+    >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Edit Goal</Text>
+
+          {/* Input field for the goal name */}
           <TextInput
             style={styles.input}
             onChangeText={(title) => setEditedGoal({ ...editedGoal, title: title })}
             placeholder="Goal Name"
             value={editedGoal.title}
           />
+
+          {/* Input field for the goal description */}
           <TextInput
             style={[styles.input, styles.description]}
             onChangeText={(description) => setEditedGoal({ ...editedGoal, description: description })}
@@ -162,7 +180,9 @@ const GoalModal = (props) => {
             onPress={() => setEditedGoal({ ...editedGoal, completed: !editedGoal.completed })}
           />
 
+          {/* Button container for Cancel and Save buttons */}
           <View style={styles.buttonContainer}>
+            {/* Cancel button */}
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
               onPress={() => {
@@ -170,6 +190,8 @@ const GoalModal = (props) => {
               }}>
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
+
+            {/* Save button */}
             <TouchableOpacity style={[styles.button, styles.saveButton]} onPress={onSave}>
               <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
