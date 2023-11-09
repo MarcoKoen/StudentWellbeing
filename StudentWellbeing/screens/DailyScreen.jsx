@@ -88,6 +88,7 @@ const DailyScreen = () => {
       const categoryHighest = {};
 
       //help from chatGPT
+      // loop through each question finding the min, max and average response from user
       for (const category of questions.map((q) => q.category)) {
         const categoryResponses = prevResponses.map((response) => {
           const categoryRating = response.ratings.find((rating) => rating.category === category);

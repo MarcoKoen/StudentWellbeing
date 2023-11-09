@@ -118,6 +118,7 @@ const GoalsHomeScreen = () => {
     fetchProducts();
   }, [,createModalVisible, goalModalVisible]);
 
+  // Check if a goal is selected and open the modal if so
   useEffect(() => {
     const goalModal = () => {
       Object.keys(goal).length > 0 ? setGoalModalVisible(true) : setGoalModalVisible(false);

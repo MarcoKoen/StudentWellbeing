@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
-import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 
@@ -15,7 +14,6 @@ const GoalCreateModal = (props) => {
     createdAt: new Date(),
   });
 
-  const navigation = useNavigation();
 
   const onPress = async () => {
     // Add a new goal to the Firestore database
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     margin: 20,
-    width: "90%", // Adjust the width as needed
+    width: "90%", 
     backgroundColor: "#FFF", // White background color
     borderRadius: 8,
     padding: 20,
@@ -96,17 +94,17 @@ const styles = StyleSheet.create({
   },
   buttonSave: {
     position: "absolute",
-    bottom: 20, // Adjust the position as needed
-    width: "50%", // Adjust the width as needed
+    bottom: 20, 
+    width: "50%", 
     borderRadius: 8,
   },
   exitButton: {
     position: "absolute",
-    height: 40, // Adjust the size as needed
-    width: 40, // Adjust the size as needed
+    height: 40, 
+    width: 40,
     borderRadius: 20,
-    top: -20, // Adjust the position as needed
-    right: -20, // Adjust the position as needed
+    top: -20, 
+    right: -20, 
     backgroundColor: "#F5CB5C", // Light yellow background color
     display: "flex",
     justifyContent: "center",
@@ -137,7 +135,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: "90%", // Adjust the width as needed
+    width: "90%",
     margin: 12,
     borderWidth: 1,
     borderRadius: 8,
@@ -145,7 +143,7 @@ const styles = StyleSheet.create({
   },
   description: {
     height: 150,
-    width: "90%", // Adjust the width as needed
+    width: "90%",
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
+import React from "react";
+import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const ModalParent = (props) => {
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //   marginTop: 22,
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {

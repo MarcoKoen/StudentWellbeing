@@ -1,4 +1,3 @@
-import { text } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
@@ -8,22 +7,22 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between", // Adjust as needed
+    justifyContent: "space-between",
   },
   buttonMainParent: {
     flex: 1,
     padding: 16,
     flexDirection: "column",
-    justifyContent: "content", // Adjust as needed
+    justifyContent: "content", 
     alignItems: "center",
-    width: "100%", // Adjust the width as needed for 2 columns
+    width: "100%", 
   },
   buttonMain: {
-    width: "100%", // Adjust the width as needed for 2 columns
+    width: "100%",
     height: 100,
   },
   buttonGrid: {
-    width: "48%", // Adjust the width as needed for 2 columns
+    width: "48%", 
     aspectRatio: 1,
   },
   button: {
@@ -51,8 +50,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
     position: "absolute",
-    bottom: 20, // Adjust as needed
-    right: 20, // Adjust as needed
+    bottom: 20,
+    right: 20,
     padding: 4,
   }
 
