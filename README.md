@@ -12,8 +12,6 @@ A mobile app designed to bring support to struggling students
 
 ## Getting Started
 
-Explain how to get started with your project. This section can include:
-
 ### A few things to check before you launch the app
 ## Anroid Studio
 - You will need to download Android Studio
