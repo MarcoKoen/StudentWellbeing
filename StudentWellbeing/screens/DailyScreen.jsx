@@ -1,10 +1,17 @@
+/**
+ * DailyScreen
+ * 
+ * Description:
+ * This screen represents the main screen for daily check-ins. It allows users to check in,
+ * view their previous responses, and see averages, lowest, and highest ratings for different categories.
+ */
+
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, FlatList } from "react-native";
 import Slider from "@react-native-community/slider";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { collection, orderBy, query, getDocs } from "firebase/firestore";
 import database from "../config/firebase";
-
 import DailyCheckIn from "../components/dailyCheckIn";
 import ViewRatingsModal from "../components/viewRatingsModal";
 
@@ -47,6 +54,7 @@ const DailyScreen = () => {
     setOpenModal(!openModal);
   };
 
+  // Fetch previous responses when the modal is opened
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -67,6 +75,7 @@ const DailyScreen = () => {
     setOpenDateModal(true);
   };
 
+  // Check if the user has already checked in today
   useEffect(() => {
     const checkDate = () => {
       if (prevResponses.length > 0) {
@@ -81,6 +90,7 @@ const DailyScreen = () => {
     checkDate();
   }, [prevResponses]);
 
+  // Calculate averages, lowest, and highest for each category
   useEffect(() => {
     if (prevResponses.length > 0) {
       const categorySums = {};
@@ -111,6 +121,7 @@ const DailyScreen = () => {
     }
   }, [prevResponses]);
 
+  // Item component for rendering each date in the FlatList
   const Item = ({ item }) => (
     <TouchableOpacity style={styles.dateItem} onPress={() => handleDatePress(item)}>
       <Text style={styles.dateText}>{item.createdAt.toDate().toDateString()}</Text>
@@ -119,12 +130,14 @@ const DailyScreen = () => {
 
   return (
     <View style={{ flexGrow: 1, backgroundColor: "#E8EDDF" }}>
+      {/* Button to initiate the daily check-in */}
       <TouchableOpacity style={styles.button} disabled={disabled} onPress={toggleModal}>
         <View>
           <Text style={styles.buttonText}>{buttonText}</Text>
         </View>
       </TouchableOpacity>
 
+    {/* Display a list of previous responses */}
       <View style={{ width: "100%", height: "50%", overflow: "scroll", display: "flex", justifyContent: "center", alignItems: "center", padding: "20" }}>
         {loading ? <Text>Loading...</Text> : <FlatList data={prevResponses} renderItem={({ item }) => <Item item={item} />} keyExtractor={(item) => item.id} />}
       </View>

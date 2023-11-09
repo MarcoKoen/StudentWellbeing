@@ -1,10 +1,16 @@
+/**
+ * GoalsHomeScreen
+ * 
+ * Description:
+ * This screen represents the main screen for managing goals. It displays goal statistics, a list of goals, and provides
+ * options to filter, add, and view goals.
+ */
+
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { collection, orderBy, query, getDocs } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-
 import database from "../config/firebase";
-
 import GoalCreateModal from "../components/goalCreateModal";
 import GoalModal from "../components/goalModal";
 
@@ -103,6 +109,7 @@ const GoalsHomeScreen = () => {
   const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState("all"); // "all", "todo", or "completed"
 
+  // Fetch goals from Firebase Firebase on component mount or when modals are closed
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -137,11 +144,12 @@ const GoalsHomeScreen = () => {
     }
   };
 
+  // Count the number of goals that are todo and completed
   const todoCount = allGoals.filter((goal) => !goal.completed).length;
   const completedCount = allGoals.filter((goal) => goal.completed).length;
 
+   // Item component for rendering each goal
   const Item = ({ item }) => (
-   
       <TouchableOpacity onPress={() => setGoal(item)} style={[styles.goalContainer, item.completed ? styles.completedGoal : null]}
       >
         <Text style={styles.goalText}>{item.title.toUpperCase()}</Text>
@@ -186,6 +194,7 @@ const GoalsHomeScreen = () => {
         </TouchableOpacity>
       </View>
 
+      {/* FlatList to display the list of goals */}
       <View style={{ flex: 1, width: "80%", paddingVertical: 8 }}>
         {loading ? (
           <Text style={styles.loadingText}>Loading...</Text>
@@ -197,10 +206,12 @@ const GoalsHomeScreen = () => {
           />
         )}
       </View>
-
+      {/* Button to add a new goal */}
       <TouchableOpacity style={styles.addGoalButton} onPress={() => setCreateModalVisible(true)}>
         <FontAwesomeIcon icon="plus" size={32} color="#333533" />
       </TouchableOpacity>
+
+      {/* Modal components for creating and viewing goals */}
       <GoalCreateModal open={createModalVisible} setOpen={setCreateModalVisible} />
       <GoalModal open={goalModalVisible} setOpen={setGoalModalVisible} goal={goal} />
     </View>

@@ -1,3 +1,14 @@
+/**
+ * HomeScreen 
+ * 
+ * Description:
+ * This screen represents the main screen of the application, providing buttons for daily check-in, concerns, goals, journal, resources,
+ * and settings. It also includes an urgent button that navigates to an urgent screen.
+ * 
+ * @param {object} props - React props passed to the component.
+ * @returns {JSX.Element} - Rendered component structure.
+ */
+
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
@@ -74,7 +85,8 @@ const HomeScreen = (props) => {
           <Text style={styles.buttonText}>Concerned for someone else</Text>
         </TouchableOpacity>
       </View>
-
+      
+      {/* Grid of buttons for Goals, Journal, Resources, and Settings */}
       <View style={styles.container}>
         <TouchableOpacity onPress={() =>
             props.navigation.navigate("Goals")
@@ -99,9 +111,9 @@ const HomeScreen = (props) => {
           <FontAwesomeIcon icon="gear" size={60} color="#F5CB5C" style={styles.icon} />
         </TouchableOpacity>
       </View>
-
     </ScrollView>
 
+     {/* Urgent button for navigating to the Urgent screen */}
     <TouchableOpacity
         onPress={()=> (props.navigation.navigate("Urgent"))}
         style={styles.urgentButton}
