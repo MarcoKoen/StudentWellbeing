@@ -1,3 +1,8 @@
+/*
+  File: JournalModal.jsx
+  Description: This file defines the JournalCreateModal component, allowing users to create a new journal entry with the option to generate a random title prompt.
+*/
+
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
@@ -6,7 +11,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 import database from "../config/firebase";
 
+/*
+  JournalCreateModal component
+  @props:
+    - open: Boolean indicating whether the modal is open
+    - setOpen: Function to toggle the modal's open state
+*/
 const JournalCreateModal = (props) => {
+  // State to manage the new journal entry's information
   const [journal, setJournal] = useState({
     title: "",
     description: "",
@@ -15,6 +27,7 @@ const JournalCreateModal = (props) => {
 
   const [generateTitleFromPrompt, setGenerateTitleFromPrompt] = useState(false);
 
+  //Array of journal title prompts
   const titlePrompts = [
     "What brings you joy?",
     "Name three things you are grateful for about today.",
@@ -37,16 +50,19 @@ const JournalCreateModal = (props) => {
   ];
   
 
+  // Function to get a random prompt from the title prompts array
   const getRandomPrompt = () => {
     const randomIndex = Math.floor(Math.random() * titlePrompts.length);
     return titlePrompts[randomIndex];
   };
 
+  // Navigation hook
   const navigation = useNavigation();
 
+  // Function to handle the creation of a new journal entry
   const onPress = async () => {
-    // Add a new journal entry to the Firestore database
     try {
+      // Add a new journal entry to the Firestore database
       if (!(journal.title.length > 0 && journal.description.length > 0)) {
         Alert.alert("Please fill out all fields");
         return;
@@ -58,52 +74,66 @@ const JournalCreateModal = (props) => {
     }
   };
 
-  const generateRandomTitle = () => {
+   // Function to generate a random title prompt
+   const generateRandomTitle = () => {
     const randomPrompt = getRandomPrompt();
     setJournal({ ...journal, title: randomPrompt });
   };
 
-  return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={props.open}
-      onRequestClose={() => {
-        props.setOpen(false);
-      }}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>New Journal Entry</Text>
+ // Render the JournalCreateModal component
+ return (
+  <Modal
+    animationType="fade"
+    transparent={true}
+    visible={props.open}
+    onRequestClose={() => {
+      props.setOpen(false);
+    }}
+  >
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <Text style={styles.modalTitle}>New Journal Entry</Text>
 
-          <TextInput
-            style={[styles.input, styles.title]}
-            value={journal.title} // Use the value prop to display the title
-            multiline={true}
-            onChangeText={(title) => setJournal({ ...journal, title: title })}
-            placeholder="Title"
-          />
-          <TouchableOpacity style={[styles.button, styles.buttonClose]} onPress={generateRandomTitle}>
-            <Text style={[styles.textStyle]}>Generate Journal Prompt</Text>
-          </TouchableOpacity>
+        {/* Input field for the journal title */}
+        <TextInput
+          style={[styles.input, styles.title]}
+          value={journal.title} // Use the value prop to display the title
+          multiline={true}
+          onChangeText={(title) => setJournal({ ...journal, title: title })}
+          placeholder="Title"
+        />
 
-          <TextInput style={[styles.input, styles.description]} onChangeText={(description) => setJournal({ ...journal, description: description })} multiline={true} placeholder="Journal Entry" />
+        {/* Button to generate a random title prompt */}
+        <TouchableOpacity style={[styles.button, styles.buttonClose]} onPress={generateRandomTitle}>
+          <Text style={[styles.textStyle]}>Generate Journal Prompt</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.exitButton, styles.buttonClose]}
-            onPress={() => {
-              props.setOpen(false);
-            }}>
-            <FontAwesomeIcon icon="x" style={[styles.x, styles.icon]} />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonClose, styles.buttonSave]} onPress={onPress}>
-            <Text style={[styles.textStyle, styles.icon]}>Save</Text>
-          </TouchableOpacity>
+        {/* Input field for the journal description */}
+        <TextInput
+          style={[styles.input, styles.description]}
+          onChangeText={(description) => setJournal({ ...journal, description: description })}
+          multiline={true}
+          placeholder="Journal Entry"
+        />
 
-          
-        </View>
+        {/* Exit button to close the modal */}
+        <TouchableOpacity
+          style={[styles.exitButton, styles.buttonClose]}
+          onPress={() => {
+            props.setOpen(false);
+          }}
+        >
+          <FontAwesomeIcon icon="times" style={[styles.x, styles.icon]} />
+        </TouchableOpacity>
+
+        {/* Save button to create the new journal entry */}
+        <TouchableOpacity style={[styles.button, styles.buttonClose, styles.buttonSave]} onPress={onPress}>
+          <Text style={[styles.textStyle, styles.icon]}>Save</Text>
+        </TouchableOpacity>
       </View>
-    </Modal>
-  );
+    </View>
+  </Modal>
+);
 };
 
 // Rest of the code remains the same
