@@ -1,12 +1,23 @@
+/*
+  File: GoalCreateModal.jsx
+  Description: This file defines the GoalCreateModal component, which allows users to create a new goal by providing a title and description.
+*/
+
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-
 import database from "../config/firebase";
 
+/*
+  GoalCreateModal component
+  @props:
+    - open: Boolean indicating whether the modal is open
+    - setOpen: Function to toggle the modal's open state
+*/
 const GoalCreateModal = (props) => {
+  // State to manage the new goal's information
   const [goal, setGoal] = useState({
     title: "",
     description: "",
@@ -14,21 +25,22 @@ const GoalCreateModal = (props) => {
     createdAt: new Date(),
   });
 
-
+  // Function to handle the creation of a new goal
   const onPress = async () => {
-    // Add a new goal to the Firestore database
-    try{
-      if(!(goal.title.length > 0 && goal.description.length > 0)){
+    try {
+      // Add a new goal to the Firestore database
+      if (!(goal.title.length > 0 && goal.description.length > 0)) {
         Alert.alert("Please fill out all fields");
-        return 
+        return;
       }
-        await addDoc(collection(database, "goals"), goal)
-        props.setOpen(false);
-    }catch(e){
+      await addDoc(collection(database, "goals"), goal);
+      props.setOpen(false);
+    } catch (e) {
       console.log(e);
     }
   };
 
+  // Render the GoalCreateModal component
   return (
     <Modal
       animationType="fade"
@@ -36,20 +48,38 @@ const GoalCreateModal = (props) => {
       visible={props.open}
       onRequestClose={() => {
         props.setOpen(false);
-      }}>
+      }}
+    >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalTitle}>New Goal</Text>
-          <TextInput style={styles.input} onChangeText={(title) => setGoal({ ...goal, title: title })} placeholder="Goal Name" />
-          <TextInput style={[styles.input, styles.description]} onChangeText={(description) => setGoal({ ...goal, description: description })} multiline={true} placeholder="Goal Description" />
 
+          {/* Input field for the goal name */}
+          <TextInput
+            style={styles.input}
+            onChangeText={(title) => setGoal({ ...goal, title: title })}
+            placeholder="Goal Name"
+          />
+
+          {/* Input field for the goal description */}
+          <TextInput
+            style={[styles.input, styles.description]}
+            onChangeText={(description) => setGoal({ ...goal, description: description })}
+            multiline={true}
+            placeholder="Goal Description"
+          />
+
+          {/* Exit button to close the modal */}
           <TouchableOpacity
             style={[styles.exitButton, styles.buttonClose]}
             onPress={() => {
               props.setOpen(false);
-            }}>
-            <FontAwesomeIcon icon="x" style={[styles.x, styles.icon]} />
+            }}
+          >
+            <FontAwesomeIcon icon="times" style={[styles.x, styles.icon]} />
           </TouchableOpacity>
+
+          {/* Save button to create the new goal */}
           <TouchableOpacity style={[styles.button, styles.buttonClose, styles.buttonSave]} onPress={onPress}>
             <Text style={[styles.textStyle, styles.icon]}>Save</Text>
           </TouchableOpacity>
