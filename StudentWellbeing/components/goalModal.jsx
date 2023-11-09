@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
-import { CheckBox } from "react-native-elements"; // Import CheckBox
+import { CheckBox } from "react-native-elements";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -22,7 +22,7 @@ import database from "../config/firebase";
 */
 const GoalModal = (props) => {
   const [editedGoal, setEditedGoal] = useState({
-    title: "", // Initialize with default values
+    title: "", // Initialise with default values
     description: "",
     completed: false,
     createdAt: new Date(),
@@ -43,7 +43,7 @@ const GoalModal = (props) => {
         return;
       }
 
-      // Update the goal in Firestore
+      // Update the goal in Firebase
       const goalRef = doc(database, "goals", props.goal.id);
       const goalDoc = await getDoc(goalRef);
       if (goalDoc.exists()) {
@@ -75,7 +75,7 @@ const GoalModal = (props) => {
       height: "70%",
       backgroundColor: "white",
       borderRadius: 20,
-      padding: 20, // Reduced padding for a cleaner look
+      padding: 20, 
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -87,58 +87,58 @@ const GoalModal = (props) => {
       elevation: 5,
     },
     modalText: {
-      marginBottom: 20, // Increased margin for better spacing
+      marginBottom: 20,
       textAlign: "center",
-      fontSize: 24, // Increased font size
+      fontSize: 24, 
       fontWeight: "bold",
       color: "#333", // Dark text color
     },
     input: {
       height: 40,
-      width: "100%", // Expanded input width
-      marginVertical: 10, // Increased vertical margin
+      width: "100%", 
+      marginVertical: 10,
       borderWidth: 1,
       borderColor: "#ccc", // Light border color
       padding: 10,
-      fontSize: 16, // Adjusted font size
+      fontSize: 16,
     },
     description: {
       height: 150,
-      width: "100%", // Expanded input width
-      marginVertical: 10, // Increased vertical margin
+      width: "100%", 
+      marginVertical: 10, 
       borderWidth: 1,
       borderColor: "#ccc", // Light border color
       padding: 10,
-      fontSize: 16, // Adjusted font size
-      textAlignVertical: "top", // Top align text
+      fontSize: 16, 
+      textAlignVertical: "top", 
     },
     checkboxContainer: {
       flexDirection: "row",
       alignItems: "center",
-      marginTop: 10, // Increased top margin
+      marginTop: 10, 
     },
     checkboxLabel: {
-      fontSize: 18, // Adjusted font size
+      fontSize: 18,
     },
     checkbox: {
-      marginLeft: 10, // Increased left margin
+      marginLeft: 10,
     },
     buttonContainer: {
       flexDirection: "row",
       justifyContent: "center",
-      marginVertical: 20, // Increased vertical margin
+      marginVertical: 20, 
     },
     cancelButton: {
       backgroundColor: "#E74C3C", // Red button color
     },
     saveButton: {
       backgroundColor: "#2ECC71", // Green button color
-      marginLeft: 10, // Adjusted left margin
+      marginLeft: 10, 
     },
     buttonText: {
       color: "white",
       fontWeight: "bold",
-      fontSize: 18, // Adjusted font size
+      fontSize: 18,
       padding: 10,
     },
   });

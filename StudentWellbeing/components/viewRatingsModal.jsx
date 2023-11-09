@@ -2,9 +2,32 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import ModalParent from "../components/modalParent";
 
+/**
+ * ViewRatingsModal Component
+ * 
+ * Description:
+ * This component displays a modal with daily check-in ratings, showing questions, and corresponding ratings.
+ * It utilises the ModalParent component to maintain a consistent modal layout.
+ * 
+ * Props:
+ * - open: Boolean indicating whether the modal is open
+ * - setOpen: Function to toggle the modal's open state
+ * - questions: Array of questions for which ratings are displayed
+ * - ratings: Array of rating data
+ * - date: Date object representing the date of the ratings
+ */
 const ViewRatingsModal = (props) => {
   const { questions, ratings, date } = props;
 
+  /**
+   * Item Component
+   * 
+   * Description:
+   * This component renders each item (question) in the FlatList.
+   * It displays the question and a set of star ratings based on the user's response.
+   * 
+   * @param {Object} item - The item (question) to be rendered
+   */
   const Item = ({ item }) => (
     <View style={styles.itemContainer}>
       <View>
@@ -50,10 +73,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-evenly",
-  },
-  itemContainer: {
-    marginVertical: 2,
-    marginHorizontal: 16,
   },
   star: {
     padding: 10,

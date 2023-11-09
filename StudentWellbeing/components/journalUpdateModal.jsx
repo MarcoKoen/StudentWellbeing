@@ -1,8 +1,6 @@
 /*
   File: JournalUpdate.jsx
   Description: This file defines the JournalUpdate component, allowing users to update and delete journal entries.
-
-  Note: Make sure to replace "YourAppName" with the actual name of your app in the file description.
 */
 
 import React, { useState, useEffect } from "react";
@@ -32,7 +30,6 @@ const JournalUpdate = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // Navigation hook
   const navigation = useNavigation();
 
   // Effect to update state when the item changes
@@ -43,14 +40,13 @@ const JournalUpdate = (props) => {
     }
   }, [props.item.item]);
 
-  // Function to update the journal entry in the Firestore database
+  // Function to update the journal entry in the database
   const updateEntry = async () => {
     try {
       const journalRef = doc(database, "journal", props.item.item.id); // Reference to the specific journal document
       const updatedData = {
         title,
         description,
-        // Add any other fields you want to update here
       };
       await setDoc(journalRef, updatedData, { merge: true }); // Merge option to update only specified fields
     } catch (error) {
@@ -59,7 +55,7 @@ const JournalUpdate = (props) => {
     props.setOpen(false);
   };
 
-  // Function to delete the journal entry from the Firestore database
+  // Function to delete the journal entry from the Firebase database
   const deleteEntry = async () => {
     try {
       const journalRef = doc(database, "journal", props.item.item.id); // Reference to the specific journal document

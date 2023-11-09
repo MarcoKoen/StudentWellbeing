@@ -2,6 +2,17 @@ import React from "react";
 import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
+/**
+ * ModalParent Component
+ * 
+ * Description:
+ * This component serves as a reusable modal container that provides a consistent layout for modals
+ * in the application. It includes an exit button and renders its children components within the modal.
+ * 
+ * Props:
+ * - open: Boolean indicating whether the modal is open
+ * - setOpen: Function to toggle the modal's open state
+ */
 const ModalParent = (props) => {
 
   return (
@@ -15,6 +26,7 @@ const ModalParent = (props) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
 
+          {/* Exit button */}
           <TouchableOpacity
             style={[styles.exitButton, styles.buttonClose]}
             onPress={() => {
@@ -22,6 +34,8 @@ const ModalParent = (props) => {
             }}>
             <FontAwesomeIcon icon="x" style={[styles.x, styles.icon]} />
           </TouchableOpacity>
+
+          {/* Render children components within the modal */}
           {props.children}
         </View>
       </View>
@@ -55,19 +69,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
   buttonClose: {
     backgroundColor: "#333533",
-  },
-  buttonSave: {
-    position: "absolute",
-    bottom: 5,
-    margin: "auto",
-    width: 150
   },
   exitButton: {
     position: "absolute",
@@ -88,31 +91,6 @@ const styles = StyleSheet.create({
   icon: {
     color: "#F5CB5C"
   },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  input: {
-    height: 40,
-    width: 250,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  description:{
-    height: 150,
-    textAlignVertical: "top",
-  }
 });
 
 export default ModalParent;

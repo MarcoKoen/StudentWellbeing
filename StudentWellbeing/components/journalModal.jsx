@@ -27,7 +27,6 @@ const JournalCreateModal = (props) => {
 
   const [generateTitleFromPrompt, setGenerateTitleFromPrompt] = useState(false);
 
-  //Array of journal title prompts
   const titlePrompts = [
     "What brings you joy?",
     "Name three things you are grateful for about today.",
@@ -56,13 +55,12 @@ const JournalCreateModal = (props) => {
     return titlePrompts[randomIndex];
   };
 
-  // Navigation hook
   const navigation = useNavigation();
 
   // Function to handle the creation of a new journal entry
   const onPress = async () => {
     try {
-      // Add a new journal entry to the Firestore database
+      // Add a new journal entry to the database
       if (!(journal.title.length > 0 && journal.description.length > 0)) {
         Alert.alert("Please fill out all fields");
         return;
@@ -135,8 +133,6 @@ const JournalCreateModal = (props) => {
   </Modal>
 );
 };
-
-// Rest of the code remains the same
 
 const styles = StyleSheet.create({
   centeredView: {

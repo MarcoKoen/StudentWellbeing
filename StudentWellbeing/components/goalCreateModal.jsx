@@ -28,7 +28,7 @@ const GoalCreateModal = (props) => {
   // Function to handle the creation of a new goal
   const onPress = async () => {
     try {
-      // Add a new goal to the Firestore database
+      // Add a new goal to the database
       if (!(goal.title.length > 0 && goal.description.length > 0)) {
         Alert.alert("Please fill out all fields");
         return;
