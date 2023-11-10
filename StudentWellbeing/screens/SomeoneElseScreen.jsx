@@ -1,7 +1,13 @@
+/**
+ * SomeoneElseScreen 
+ * 
+ * Description:
+ * This screen serves as the main screen for navigating prompts if you are concerned with someone
+ * 
+ */
+
 import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView} from "react-native";
 import React, { useState, useEffect } from "react";
-
-
 
 const SomeoneElseScreen = (props) => {
 
@@ -23,7 +29,7 @@ const SomeoneElseScreen = (props) => {
     const [leftPosition, setLeftPosition] = useState(data[0].leftPosition);
     const [rightPosition, setRightPosition] = useState(data[0].rightPosition);
 
-
+    // Function to update the state based on the chosen option
     const updateData = (position) => {
         setDescription(data[position].description)
         setLeftButtonText(data[position].left)
@@ -35,7 +41,9 @@ const SomeoneElseScreen = (props) => {
     return (
     <ScrollView>
     <View style={styles.screen}>
+        {/* Display the prompt description */}
         <Text style={styles.text}>{description}</Text>
+        {/* Display buttons based on the prompt options */}
         <View style={styles.grid}>
         {rightButtonText == "Continue" ?  
         <TouchableOpacity onPress={() => updateData(rightPosition)} style={styles.button}>
