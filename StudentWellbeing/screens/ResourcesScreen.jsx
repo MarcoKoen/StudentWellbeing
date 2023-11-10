@@ -1,3 +1,12 @@
+/**
+ * Resources Screen
+ * 
+ * Description:
+ * This screen provides links to various resources related to breathing and meditation, healthy eating,
+ * mental health, drug and alcohol awareness, and other health-related information.
+ * 
+ */
+
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Linking, StyleSheet } from 'react-native';
 
@@ -104,13 +113,14 @@ const ResourcesScreen = () => {
     },
   ]);
 
-
+  // Function to toggle the open/closed status of a section
   const toggleSection = (index) => {
     const updatedSections = [...sections];
     updatedSections[index].isOpen = !updatedSections[index].isOpen;
     setSections(updatedSections);
   };
 
+  // Function to handle pressing a link, opening it in the default browser
   const handleLinkPress = (link) => {
     Linking.openURL(link);
   };
@@ -119,9 +129,11 @@ const ResourcesScreen = () => {
     <ScrollView style={styles.container}>
       {sections.map((section, index) => (
         <View key={index} style={styles.section}>
+          {/* Toggle section open/closed when the title is pressed */}
           <TouchableOpacity onPress={() => toggleSection(index)}>
             <Text style={styles.sectionTitle}>{section.title}</Text>
           </TouchableOpacity>
+          {/* Display links if the section is open */}
           {section.isOpen && (
             <View style={styles.linkContainer}>
               {section.links.map((link, linkIndex) => (
