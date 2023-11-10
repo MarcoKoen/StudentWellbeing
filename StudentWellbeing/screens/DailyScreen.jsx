@@ -143,14 +143,15 @@ const DailyScreen = () => {
       </View>
 
       {/* Display category data */}
+      {averages && lowest && highest && (
       <View style={styles.dataContainer}>
         <ScrollView horizontal={true}>
           <View style={styles.categoryContent}>
             <Text style={styles.categoryHeader}>Category Averages</Text>
             {questions.map((q) => (
-              <Text key={q.category}>
-                {q.category}: {averages[q.category].toFixed(1) || 0}
-              </Text>
+             <Text key={q.category}>
+             {q.category}: {averages[q.category] ? averages[q.category].toFixed(1) : 0}
+           </Text>
             ))}
           </View>
           <View style={styles.categoryContent}>
@@ -171,6 +172,7 @@ const DailyScreen = () => {
           </View>
         </ScrollView>
       </View>
+      )}
 
       <DailyCheckIn open={openModal} setOpen={toggleModal} questions={questions} />
       <ViewRatingsModal open={openDateModal} setOpen={setOpenDateModal} questions={questions} ratings={selectedDate.ratings} date={selectedDate.createdAt} />
