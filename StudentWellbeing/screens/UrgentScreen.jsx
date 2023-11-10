@@ -1,6 +1,13 @@
-import { Alert, Modal, StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView} from "react-native";
+/**
+ * UrgentScreen 
+ * 
+ * Description:
+ * This screen provides information about the Student Success hotline and allows the user to trigger a phone call.
+ * 
+ */
+
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import call from 'react-native-phone-call'
-import {Linking} from 'react-native'
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const UrgentScreen = () => {
@@ -11,6 +18,7 @@ const UrgentScreen = () => {
         skipCanOpen: true // Skip the canOpenURL check
       }
 
+      // Function to trigger the phone call
       const triggerCall = () => {
         call(args).catch(console.error);
       }
@@ -18,7 +26,9 @@ const UrgentScreen = () => {
     return (
     <>
     <View style={styles.screen}>
+        {/* Display information about Student Success hotline */}
         <Text style={styles.text}>Student Success is open Monday to Friday 8:30 am - 5 pm</Text>
+        {/* Button to trigger the phone call */}
         <TouchableOpacity onPress= {()=> triggerCall()}>
         <FontAwesomeIcon icon="phone" size={30} style={styles.icon} />
         </TouchableOpacity> 
