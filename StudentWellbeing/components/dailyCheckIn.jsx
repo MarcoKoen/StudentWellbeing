@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
 import database from "../config/firebase";
-import ModalParent from "../components/ModalParent";
+import ModalParent from "../components/modalParent";
 
 /*
   DailyCheckIn component
