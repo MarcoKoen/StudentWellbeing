@@ -149,7 +149,7 @@ const DailyScreen = () => {
             <Text style={styles.categoryHeader}>Category Averages</Text>
             {questions.map((q) => (
               <Text key={q.category}>
-                {q.category}: {averages[q.category] || 0}
+                {q.category}: {averages[q.category].toFixed(1) || 0}
               </Text>
             ))}
           </View>
