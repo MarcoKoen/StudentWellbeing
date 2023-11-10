@@ -103,31 +103,43 @@ const Journal = () => {
     };
     
 
-return (
-  <View style={styles.pageStyle}>
-    {/* Render the "New Entry" button with the JournalEntry modal */}
-    {loading ? <Text>Loading....</Text> : 
-    <>
-    <TouchableOpacity style={[styles.button]}>
-        <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible}/>
-        <Text style={styles.buttonText} onPress={()=>setCreateJournalVisible(true)}>New Entry</Text>
-    </TouchableOpacity>
-    {/* ScrollView to display the list of journal entries in a two-column grid */}
-    <ScrollView >
-      <View>
-        <FlatList
-        data={journalEntries}
-        renderItem={({item}) => <Item item={item}/> }
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        />
-    </View>
-    </ScrollView>
-    </>}
-    </View>
+    const [selectedItem, setSelectedItem] = useState(null);
 
-);
-
-}
+    const handleItemPress = (item) => {
+      setSelectedItem(item);
+      setEditJournalVisible(true);
+    };
+  
+    return (
+      <View style={styles.pageStyle}>
+        {/* Render the "New Entry" button with the JournalEntry modal */}
+        {loading ? (
+          <Text>Loading....</Text>
+        ) : (
+          <>
+            <TouchableOpacity style={styles.button}>
+              <JournalEntry open={createJournalVisible} setOpen={setCreateJournalVisible} />
+              <Text style={styles.buttonText} onPress={() => setCreateJournalVisible(true)}>
+                New Entry
+              </Text>
+            </TouchableOpacity>
+            {/* Display the JournalUpdate modal if an item is selected */}
+            {selectedItem && (
+              <JournalUpdate open={editJournalVisible} setOpen={setEditJournalVisible} item={selectedItem} />
+            )}
+            {/* FlatList to display the list of journal entries in a two-column grid */}
+            <FlatList
+              data={journalEntries}
+              renderItem={({ item }) => (
+                <Item item={item} onPress={() => handleItemPress(item)} />
+              )}
+              keyExtractor={(item) => item.id}
+              numColumns={2}
+            />
+          </>
+        )}
+      </View>
+    );
+  };
 
 export default Journal;
